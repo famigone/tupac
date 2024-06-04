@@ -1,10 +1,4 @@
-/target/
-.gradle
-build/
-!**/src/main/**/target/
-!**/src/test/**/target/
-!**/src/main/**/build/
-!**/src/test/**/build/
+
 
 # The following files are automatically generated/updated
 node_modules/
