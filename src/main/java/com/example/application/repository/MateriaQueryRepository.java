@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface MateriaQueryRepository {
 
-    List<Materia> save();
+    
 
     List<Materia> getAll();
 

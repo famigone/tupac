@@ -3,24 +3,31 @@ package com.example.application.model;
 
 import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.Column;
+
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
-import java.sql.Date;
+
+import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Data
-@Builder
-
+@NoArgsConstructor 
+//@Builder
 @Table("materia")
 
-public class Materia implements Serializable {
+public class Materia {
 
     @PrimaryKey
-    private Long id;
+    @Column("id")
+    private UUID id;
+
 
     @Column("nombre")
     private String nombre;
@@ -28,13 +35,10 @@ public class Materia implements Serializable {
     @Column("descripcion")
     private String descripcion;
 
-    @Column("desde")
-    private Date desde;
 
-    @Column("hasta")
-    private Date hasta;
-    
-
-    
+    @Transient
+    public void generateId() {
+        this.id = UUID.randomUUID();
+    }
 
 }

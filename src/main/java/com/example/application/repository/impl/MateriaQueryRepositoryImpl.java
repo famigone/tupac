@@ -20,12 +20,6 @@ public class MateriaQueryRepositoryImpl implements MateriaQueryRepository {
     @Autowired
     private CassandraOperations cassandraTemplate;
 
-    @Override
-    public List<Materia> save() {
-        List<Materia> Materias = cassandraTemplate.select(Query.empty(), Materia.class);
-        
-        return cassandraTemplate.select(Query.empty(), Materia.class);
-    }
 
     @Override
     public List<Materia> getAll() {
@@ -50,9 +44,6 @@ public class MateriaQueryRepositoryImpl implements MateriaQueryRepository {
     @Override
     public Materia getSingleMateriaByNombre(String nombre) {
         return cassandraTemplate.selectOne(Query.query(Criteria.where("super_nombre").is(nombre)).withAllowFiltering(), Materia.class);
-    }
-
-    
-
+    }    
     
 }

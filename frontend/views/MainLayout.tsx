@@ -20,6 +20,9 @@ export default function MainLayout() {
         <header className="flex flex-col gap-m">
           <span className="font-semibold text-l">My App</span>
           <nav>
+            <NavLink className={navLinkClasses} to="/materia">
+              Materias
+            </NavLink>
             <NavLink className={navLinkClasses} to="/">
               Hello World
             </NavLink>
