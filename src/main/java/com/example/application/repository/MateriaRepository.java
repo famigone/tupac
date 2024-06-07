@@ -9,8 +9,8 @@ import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MateriaRepository extends CassandraRepository<Materia, UUID> {
+public interface MateriaRepository extends CassandraRepository<Materia, Long> {
     Materia save(Materia materia);
 
-    Optional<Materia> findById(UUID id);
+    Optional<Materia> findById(String id);
 }

@@ -39,11 +39,12 @@ export default function HomeMateria() {
     }
   };
 
-  async function onMateriaSaved(Materia: MateriaRecord) {
-    const saved = await MateriaService.save(Materia)
-    if (Materia.id) {
+  async function onMateriaSaved(Materia: MateriaRecord) {    
+    console.log("Materia.id "+Materia.id)
+    const saved = await MateriaService.save(Materia)        
+    if (Materia.id) {      
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
-    } else {
+    } else {      
       setMaterias(Materias => [...Materias, saved]);
     }
     setSelected(saved);

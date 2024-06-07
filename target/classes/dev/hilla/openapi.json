@@ -70,8 +70,9 @@
                 "type" : "object",
                 "properties" : {
                   "id" : {
-                    "type" : "string",
-                    "x-java-type" : "java.lang.String"
+                    "type" : "integer",
+                    "format" : "int64",
+                    "x-java-type" : "java.lang.Long"
                   }
                 }
               }
@@ -154,6 +155,48 @@
           }
         }
       }
+    },
+    "/MateriaService/saveMateria" : {
+      "post" : {
+        "tags" : [
+          "MateriaService"
+        ],
+        "operationId" : "MateriaService_saveMateria_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "nuevaMateria" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.services.MateriaService$MateriaRecord"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.services.MateriaService$MateriaRecord"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -162,8 +205,9 @@
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "string",
-            "x-java-type" : "java.lang.String"
+            "type" : "integer",
+            "format" : "int64",
+            "x-java-type" : "java.lang.Long"
           },
           "nombre" : {
             "type" : "string",

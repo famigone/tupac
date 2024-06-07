@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,11 @@ import org.springframework.stereotype.Service;
 public class MateriaService {
 
     private final MateriaRepository repository;
+ 
+    
 
     public record MateriaRecord(
-            UUID id,
+            Long id,
             // nombre de la aplicación
             @NotNull             
             String nombre,            
@@ -54,14 +57,24 @@ public class MateriaService {
                 );
     }
 
-    private MateriaRecord saveMateria(MateriaRecord nuevaMateria) {
+    private static Long generateRandomLong() {
+        UUID uuid = UUID.randomUUID();
+        long mostSignificantBits = uuid.getMostSignificantBits();
+        long leastSignificantBits = uuid.getLeastSignificantBits();
+        return Math.abs(mostSignificantBits ^ leastSignificantBits);
+    }
+
+    public MateriaRecord saveMateria(MateriaRecord nuevaMateria) {
         // Crea un nuevo objeto Materia y asigna los valores del objeto recibido
         Materia dbMateria = new Materia();
+        
+        dbMateria.setId(generateRandomLong());      
         dbMateria.setNombre(nuevaMateria.nombre);        
         dbMateria.setDescripcion(nuevaMateria.descripcion);        
         //dbMateria.setDesde(nuevaMateria.desde);        
         //dbMateria.setHasta(nuevaMateria.hasta);
         // Guarda el nuevo organismo en la base de datos
+        System.out.println("ID "+dbMateria.getId());
         Materia savedMateria = repository.save(dbMateria);
 
         // Devuelve el organismo guardado después de convertirlo a MateriaRecord 
@@ -81,7 +94,7 @@ public class MateriaService {
         return toMateriaRecord(savedMateria);
     }
 
-    public void delete(UUID id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
     
@@ -92,12 +105,16 @@ public class MateriaService {
     }
 
     public MateriaRecord save(MateriaRecord laMateria) {
+       
         MateriaRecord rta;
         // var dbMateria = repository.findById(elMateria.id);
-        if (laMateria.id() == null)
+        if (laMateria.id() == 0)   {         
+            System.out.println("oneeeeeeeeee");
             rta = this.saveMateria(laMateria);
-        else
-            rta = this.updateMateria(laMateria);
+        }else{
+            System.out.println("twooooooooooo");
+            rta = this.updateMateria(laMateria);            
+        }    
         return rta;
     }
 

@@ -22,11 +22,10 @@ import java.util.UUID;
 //@Builder
 @Table("materia")
 
-public class Materia {
+public class Materia implements Serializable {
 
     @PrimaryKey
-    @Column("id")
-    private UUID id;
+    private Long id;
 
 
     @Column("nombre")
@@ -36,9 +35,5 @@ public class Materia {
     private String descripcion;
 
 
-    @Transient
-    public void generateId() {
-        this.id = UUID.randomUUID();
-    }
 
 }
