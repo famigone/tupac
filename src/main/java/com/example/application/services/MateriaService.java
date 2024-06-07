@@ -82,13 +82,13 @@ public class MateriaService {
     }
 
     private MateriaRecord updateMateria(MateriaRecord laMateria) {
+        System.out.println("va a actualizar a "+laMateria.id);
         var dbMateria = repository.findById(laMateria.id).orElseThrow();
-
+        System.out.println("encontró a "+dbMateria.getId());
         dbMateria.setNombre(laMateria.nombre);        
        // dbMateria.setDesde(laMateria.desde);        
        // dbMateria.setHasta(laMateria.hasta);        
-        dbMateria.setNombre(laMateria.descripcion);        
-
+        dbMateria.setDescripcion(laMateria.descripcion);                
         Materia savedMateria = repository.save(dbMateria);
         
         return toMateriaRecord(savedMateria);

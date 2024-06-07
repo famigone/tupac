@@ -27,7 +27,6 @@ public class Materia implements Serializable {
     @PrimaryKey
     private Long id;
 
-
     @Column("nombre")
     private String nombre;
 
