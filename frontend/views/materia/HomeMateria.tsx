@@ -40,7 +40,11 @@ export default function HomeMateria() {
   };
 
   async function onMateriaSaved(Materia: MateriaRecord) {    
+    if (!selected) return;
+    console.log("entreo en submiiiiiiiiit ")
     console.log("Materia.id "+Materia.id)
+    console.log("y ahoraaaaaaa ")
+    console.log("Selected.id "+selected.id)
     const saved = await MateriaService.save(Materia)        
     if (Materia.id) {      
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
@@ -48,8 +52,6 @@ export default function HomeMateria() {
       setMaterias(Materias => [...Materias, saved]);
     }
     setSelected(saved);
-
-
   }
 
   return (
@@ -65,9 +67,12 @@ export default function HomeMateria() {
           theme="row-stripes"
           allRowsVisible
           items={Materias}
-          onActiveItemChanged={e => setSelected(e.detail.value)}
+          onActiveItemChanged={e => {
+            console.log(e.detail.value)
+            setSelected(e.detail.value)
+          }}
           selectedItems={[selected]}>
-          <GridFilterColumn path="codigo" header="CÓDIGO" />         
+          <GridFilterColumn path="id" header="ID" />         
           <GridFilterColumn path="nombre" header="NOMBRE" />         
           <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />         
         </Grid>

@@ -1,0 +1,9 @@
+/home/fede/tupac/src/main/java/com/example/application/cassandra/CassandraConfig.java
+/home/fede/tupac/src/main/java/com/example/application/repository/impl/MateriaQueryRepositoryImpl.java
+/home/fede/tupac/src/main/java/com/example/application/services/package-info.java
+/home/fede/tupac/src/main/java/com/example/application/services/HelloWorldService.java
+/home/fede/tupac/src/main/java/com/example/application/repository/MateriaQueryRepository.java
+/home/fede/tupac/src/main/java/com/example/application/Application.java
+/home/fede/tupac/src/main/java/com/example/application/model/Materia.java
+/home/fede/tupac/src/main/java/com/example/application/services/MateriaService.java
+/home/fede/tupac/src/main/java/com/example/application/repository/MateriaRepository.java
