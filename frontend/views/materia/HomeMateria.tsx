@@ -23,6 +23,7 @@ export default function HomeMateria() {
 
   useEffect(() => {
     MateriaService.findAllMaterias().then(setMaterias)
+    console.log(setMaterias)
   }, []);
 
 
@@ -39,12 +40,12 @@ export default function HomeMateria() {
     }
   };
 
-  async function onMateriaSaved(Materia: MateriaRecord) {    
-    if (!selected) return;
+  async function onMateriaSaved(Materia: MateriaRecord) {        
+    //if (!selected) return;
     console.log("entreo en submiiiiiiiiit ")
     console.log("Materia.id "+Materia.id)
     console.log("y ahoraaaaaaa ")
-    console.log("Selected.id "+selected.id)
+    //console.log("Selected.id "+selected.id)
     const saved = await MateriaService.save(Materia)        
     if (Materia.id) {      
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
@@ -68,7 +69,7 @@ export default function HomeMateria() {
           allRowsVisible
           items={Materias}
           onActiveItemChanged={e => {
-            console.log(e.detail.value)
+            //console.log(e.detail.value)
             setSelected(e.detail.value)
           }}
           selectedItems={[selected]}>
