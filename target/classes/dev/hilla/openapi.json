@@ -226,6 +226,16 @@
               }
             ],
             "x-java-type" : "java.lang.String"
+          },
+          "desde" : {
+            "type" : "string",
+            "format" : "date-time",
+            "x-java-type" : "java.time.LocalDateTime"
+          },
+          "hasta" : {
+            "type" : "string",
+            "format" : "date-time",
+            "x-java-type" : "java.time.LocalDateTime"
           }
         }
       }

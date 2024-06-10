@@ -12,8 +12,10 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
-
+import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -33,6 +35,10 @@ public class Materia implements Serializable {
     @Column("descripcion")
     private String descripcion;
 
+    @Column("desde")
+    private LocalDateTime desde;
 
+    @Column("hasta")
+    private LocalDateTime hasta;
 
 }

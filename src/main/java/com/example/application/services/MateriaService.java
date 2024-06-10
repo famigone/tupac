@@ -10,7 +10,10 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +42,10 @@ public class MateriaService {
             String nombre,            
             
             @NotNull             
-            String descripcion
+            String descripcion,
 
+            LocalDateTime desde, 
+            LocalDateTime hasta 
             ) {
     }
 
@@ -52,7 +57,9 @@ public class MateriaService {
         return new MateriaRecord(
                 laMateria.getId(),
                 laMateria.getNombre(), 
-                laMateria.getDescripcion() 
+                laMateria.getDescripcion(),
+                laMateria.getDesde(),
+                laMateria.getHasta()
 
                 );
     }
@@ -71,10 +78,11 @@ public class MateriaService {
         dbMateria.setId(generateRandomLong());      
         dbMateria.setNombre(nuevaMateria.nombre);        
         dbMateria.setDescripcion(nuevaMateria.descripcion);        
-        //dbMateria.setDesde(nuevaMateria.desde);        
-        //dbMateria.setHasta(nuevaMateria.hasta);
-        // Guarda el nuevo organismo en la base de datos
-        System.out.println("ID "+dbMateria.getId());
+        System.out.println("desde "+nuevaMateria.desde);
+        System.out.println("hasta "+nuevaMateria.hasta);
+        dbMateria.setDesde(nuevaMateria.desde);        
+        dbMateria.setHasta(nuevaMateria.hasta);
+        // Guarda el nuevo organismo en la base de datos        
         Materia savedMateria = repository.save(dbMateria);
 
         // Devuelve el organismo guardado después de convertirlo a MateriaRecord 

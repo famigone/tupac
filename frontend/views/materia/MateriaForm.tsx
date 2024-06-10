@@ -8,7 +8,8 @@ import MateriaRecord from "Frontend/generated/com/example/application/services/M
 import MateriaRecordModel from "Frontend/generated/com/example/application/services/MateriaService/MateriaRecordModel";
 import { Icon } from "@hilla/react-components/Icon.js";
 import { NotEmpty } from "@hilla/form/Validators.js";
-import { DatePicker } from "@hilla/react-components/DatePicker.js";
+import { DatePicker, DatePickerElement } from "@hilla/react-components/DatePicker.js";
+import { DateTimePicker } from "@hilla/react-components/DateTimePicker.js";
 
 interface MateriaFormProps {
     Materia?: MateriaRecord | null;
@@ -65,7 +66,8 @@ export default function MateriaForm({ Materia, onSubmit }: MateriaFormProps) {
                 
                 <TextField label="Nombre" {...field(model.nombre)} />
                 <TextField label="Descripción" {...field(model.descripcion)} />
-                
+                <DateTimePicker label="Desde" {...field(model.desde)} />
+                <DateTimePicker label="Desde" {...field(model.hasta)} />
                 
 
             </div>

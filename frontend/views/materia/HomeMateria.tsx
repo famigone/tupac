@@ -40,7 +40,7 @@ export default function HomeMateria() {
   };
 
   async function onMateriaSaved(Materia: MateriaRecord) {    
-    console.log("Materia.id "+Materia.id)
+   
     const saved = await MateriaService.save(Materia)        
     if (Materia.id) {      
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
@@ -66,10 +66,11 @@ export default function HomeMateria() {
           allRowsVisible
           items={Materias}
           onActiveItemChanged={e => setSelected(e.detail.value)}
-          selectedItems={[selected]}>
-          <GridFilterColumn path="codigo" header="CÓDIGO" />         
+          selectedItems={[selected]}>          
           <GridFilterColumn path="nombre" header="NOMBRE" />         
           <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />         
+          <GridFilterColumn path="desde" header="DESDE" />         
+          <GridFilterColumn path="hasta" header="HASTA" />         
         </Grid>
 
         <div style={{ margin: '3px' }} className="flex gap-m gap-s">
