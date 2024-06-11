@@ -15,7 +15,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
 
-<<<<<<< HEAD
+
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -32,8 +32,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-=======
->>>>>>> e4dbe84121ae229afa4f0ad8bcf897e51fac39c6
+
 @Service
 @AnonymousAllowed
 @BrowserCallable
