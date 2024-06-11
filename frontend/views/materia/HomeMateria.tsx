@@ -23,6 +23,7 @@ export default function HomeMateria() {
 
   useEffect(() => {
     MateriaService.findAllMaterias().then(setMaterias)
+    console.log(setMaterias)
   }, []);
 
 
@@ -39,8 +40,17 @@ export default function HomeMateria() {
     }
   };
 
+<<<<<<< HEAD
   async function onMateriaSaved(Materia: MateriaRecord) {    
    
+=======
+  async function onMateriaSaved(Materia: MateriaRecord) {        
+    //if (!selected) return;
+    console.log("entreo en submiiiiiiiiit ")
+    console.log("Materia.id "+Materia.id)
+    console.log("y ahoraaaaaaa ")
+    //console.log("Selected.id "+selected.id)
+>>>>>>> e4dbe84121ae229afa4f0ad8bcf897e51fac39c6
     const saved = await MateriaService.save(Materia)        
     if (Materia.id) {      
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
@@ -48,8 +58,6 @@ export default function HomeMateria() {
       setMaterias(Materias => [...Materias, saved]);
     }
     setSelected(saved);
-
-
   }
 
   return (
@@ -65,8 +73,17 @@ export default function HomeMateria() {
           theme="row-stripes"
           allRowsVisible
           items={Materias}
+<<<<<<< HEAD
           onActiveItemChanged={e => setSelected(e.detail.value)}
           selectedItems={[selected]}>          
+=======
+          onActiveItemChanged={e => {
+            //console.log(e.detail.value)
+            setSelected(e.detail.value)
+          }}
+          selectedItems={[selected]}>
+          <GridFilterColumn path="id" header="ID" />         
+>>>>>>> e4dbe84121ae229afa4f0ad8bcf897e51fac39c6
           <GridFilterColumn path="nombre" header="NOMBRE" />         
           <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />         
           <GridFilterColumn path="desde" header="DESDE" />         

@@ -1,15 +1,21 @@
 package com.example.application.services;
 
 
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
+
+import org.springframework.stereotype.Service;
+
 import com.example.application.model.Materia;
 import com.example.application.repository.MateriaRepository;
-
 import com.example.application.services.MateriaService.MateriaRecord;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import dev.hilla.BrowserCallable;
 import jakarta.validation.constraints.NotNull;
 
+<<<<<<< HEAD
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -26,6 +32,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+=======
+>>>>>>> e4dbe84121ae229afa4f0ad8bcf897e51fac39c6
 @Service
 @AnonymousAllowed
 @BrowserCallable
@@ -65,10 +73,12 @@ public class MateriaService {
     }
 
     private static Long generateRandomLong() {
-        UUID uuid = UUID.randomUUID();
+      /*   UUID uuid = UUID.randomUUID();
         long mostSignificantBits = uuid.getMostSignificantBits();
         long leastSignificantBits = uuid.getLeastSignificantBits();
         return Math.abs(mostSignificantBits ^ leastSignificantBits);
+        */
+        return ThreadLocalRandom.current().nextLong((long)666666);  
     }
 
     public MateriaRecord saveMateria(MateriaRecord nuevaMateria) {
@@ -116,7 +126,7 @@ public class MateriaService {
        
         MateriaRecord rta;
         // var dbMateria = repository.findById(elMateria.id);
-        if (laMateria.id() == 0)   {         
+        if (!(laMateria.id > 0))   {         
             System.out.println("oneeeeeeeeee");
             rta = this.saveMateria(laMateria);
         }else{

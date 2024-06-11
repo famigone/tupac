@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /home/federico/tupac/src/main/java/com/example/application/cassandra/CassandraConfig.java
 /home/federico/tupac/src/main/java/com/example/application/repository/UserRepository.java
 /home/federico/tupac/src/main/java/com/example/application/model/Role.java
@@ -13,3 +14,14 @@
 /home/federico/tupac/src/main/java/com/example/application/Application.java
 /home/federico/tupac/src/main/java/com/example/application/security/AuthenticatedUser.java
 /home/federico/tupac/src/main/java/com/example/application/repository/MateriaRepository.java
+=======
+/home/fede/tupac/src/main/java/com/example/application/cassandra/CassandraConfig.java
+/home/fede/tupac/src/main/java/com/example/application/repository/impl/MateriaQueryRepositoryImpl.java
+/home/fede/tupac/src/main/java/com/example/application/services/package-info.java
+/home/fede/tupac/src/main/java/com/example/application/services/HelloWorldService.java
+/home/fede/tupac/src/main/java/com/example/application/repository/MateriaQueryRepository.java
+/home/fede/tupac/src/main/java/com/example/application/Application.java
+/home/fede/tupac/src/main/java/com/example/application/model/Materia.java
+/home/fede/tupac/src/main/java/com/example/application/services/MateriaService.java
+/home/fede/tupac/src/main/java/com/example/application/repository/MateriaRepository.java
+>>>>>>> e4dbe84121ae229afa4f0ad8bcf897e51fac39c6
