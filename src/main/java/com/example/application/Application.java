@@ -4,6 +4,7 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 /**
@@ -13,8 +14,9 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
  * and some desktop browsers.
  *
  */
-@SpringBootApplication
+@ComponentScan(basePackages = "com.example.application")
 @EnableCassandraRepositories
+@SpringBootApplication
 @Theme(value = "tupac")
 public class Application implements AppShellConfigurator {
 

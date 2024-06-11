@@ -1,0 +1,16 @@
+com/example/application/services/package-info.class
+com/example/application/services/HelloWorldService.class
+com/example/application/cassandra/CassandraConfig.class
+com/example/application/services/MateriaService$MateriaRecord.class
+com/example/application/security/SecurityConfiguration.class
+com/example/application/Application.class
+com/example/application/security/UserDetailsServiceImpl.class
+com/example/application/repository/MateriaQueryRepository.class
+com/example/application/services/MateriaService.class
+com/example/application/repository/MateriaRepository.class
+com/example/application/repository/impl/MateriaQueryRepositoryImpl.class
+com/example/application/security/AuthenticatedUser.class
+com/example/application/model/Role.class
+com/example/application/repository/UserRepository.class
+com/example/application/model/User.class
+com/example/application/model/Materia.class
