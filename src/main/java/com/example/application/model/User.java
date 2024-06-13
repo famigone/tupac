@@ -39,11 +39,15 @@ public class User implements Serializable {
     private Long id;
     private String username;
     private String name;
-
+    private String password;
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     @JsonIgnore
-    private String hashedPassword;
-
-    
+    private String hashedPassword;    
     
     private Set<Role> roles;
 

@@ -12,6 +12,10 @@
   ],
   "tags" : [
     {
+      "name" : "UserEndpoint",
+      "x-class-name" : "com.example.application.services.UserEndpoint"
+    },
+    {
       "name" : "HelloWorldService",
       "x-class-name" : "com.example.application.services.HelloWorldService"
     },
@@ -21,6 +25,73 @@
     }
   ],
   "paths" : {
+    "/UserEndpoint/getAuthenticatedUser" : {
+      "post" : {
+        "tags" : [
+          "UserEndpoint"
+        ],
+        "operationId" : "UserEndpoint_getAuthenticatedUser_POST",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "nullable" : true,
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.model.User"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserEndpoint/registerUser" : {
+      "post" : {
+        "tags" : [
+          "UserEndpoint"
+        ],
+        "operationId" : "UserEndpoint_registerUser_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "user" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.model.User"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.model.User"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/HelloWorldService/sayHello" : {
       "post" : {
         "tags" : [
@@ -201,6 +272,39 @@
   },
   "components" : {
     "schemas" : {
+      "com.example.application.model.User" : {
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string",
+            "nullable" : true,
+            "x-java-type" : "java.lang.String"
+          },
+          "name" : {
+            "type" : "string",
+            "nullable" : true,
+            "x-java-type" : "java.lang.String"
+          },
+          "password" : {
+            "type" : "string",
+            "nullable" : true,
+            "x-java-type" : "java.lang.String"
+          },
+          "roles" : {
+            "type" : "array",
+            "nullable" : true,
+            "items" : {
+              "nullable" : true,
+              "anyOf" : [
+                {
+                  "$ref" : "#/components/schemas/com.example.application.model.Role"
+                }
+              ]
+            },
+            "x-java-type" : "java.util.Set"
+          }
+        }
+      },
       "com.example.application.services.MateriaService$MateriaRecord" : {
         "type" : "object",
         "properties" : {
@@ -238,6 +342,13 @@
             "x-java-type" : "java.time.LocalDateTime"
           }
         }
+      },
+      "com.example.application.model.Role" : {
+        "type" : "string",
+        "enum" : [
+          "USER",
+          "ADMIN"
+        ]
       }
     }
   }
