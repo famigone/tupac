@@ -1,8 +1,11 @@
 package com.example.application.security;
 
+import com.datastax.oss.driver.api.core.CqlSession;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import java.util.Base64;
 import javax.crypto.spec.SecretKeySpec;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +21,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
 
+  
+
     // The secret is stored in /config/secrets/application.properties by default.
     // Never commit the secret into version control; each environment should have
     // its own secret.
     @Value("${com.example.application.auth.secret}")
     private String authSecret;
+
+    @Autowired
+    private CassandraUserDetailsServiceImpl userDetailsService;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,7 +45,9 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                 authorize -> authorize.requestMatchers(new AntPathRequestMatcher("/images/*.png")).permitAll());
         // Icons from the line-awesome addon
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(new AntPathRequestMatcher("/line-awesome/**/*.svg")).permitAll());
+                .requestMatchers(new AntPathRequestMatcher("/line-awesome/**/*.svg")).permitAll());                
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(new AntPathRequestMatcher("/register")).permitAll());                
 
         super.configure(http);
 

@@ -9,6 +9,8 @@ import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecif
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
+import com.datastax.oss.driver.api.core.CqlSession;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -60,5 +62,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     public String[] getEntityBasePackages() {
         return new String[] {"com.example.application.model"};
     }
+
+  
 
 }
