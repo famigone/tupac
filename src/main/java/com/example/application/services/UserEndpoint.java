@@ -24,7 +24,7 @@ public class UserEndpoint {
             Long id,
             String username,
             String name,
-            String hashedPassword,
+            String password,
             Set<Role> roles
             ) {
     }
