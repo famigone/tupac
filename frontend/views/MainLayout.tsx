@@ -18,7 +18,7 @@ export default function MainLayout() {
     <AppLayout primarySection="drawer">
       <div slot="drawer" className="flex flex-col justify-between h-full p-m">
         <header className="flex flex-col gap-m">
-          <span className="font-semibold text-l">My App</span>
+          <span className="font-semibold text-l">TUPAC</span>
           <nav>
             <NavLink className={navLinkClasses} to="/materia">
               Materias

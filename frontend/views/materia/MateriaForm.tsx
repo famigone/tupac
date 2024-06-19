@@ -10,6 +10,10 @@ import { Icon } from "@hilla/react-components/Icon.js";
 import { NotEmpty } from "@hilla/form/Validators.js";
 import { DatePicker, DatePickerElement } from "@hilla/react-components/DatePicker.js";
 import { DateTimePicker } from "@hilla/react-components/DateTimePicker.js";
+import { TextArea } from "@hilla/react-components/TextArea.js";
+
+import { Divider, Grid, GridItem } from '@chakra-ui/react'
+import { FormLayout } from "@hilla/react-components/FormLayout.js";
 
 interface MateriaFormProps {
     Materia?: MateriaRecord | null;
@@ -58,26 +62,31 @@ export default function MateriaForm({ Materia, onSubmit }: MateriaFormProps) {
 
     }, []);
 
-
+    const responsiveSteps = [
+        { minWidth: '0', columns: 1 },
+        { minWidth: '500px', columns: 2 },
+      ];
     return (
         <>
 
-            <div className="flex gap-s items-start">
-                
+
+
+            
+            <FormLayout responsiveSteps={responsiveSteps}>
                 <TextField label="Nombre" {...field(model.nombre)} />
-                <TextField label="Descripción" {...field(model.descripcion)} />
+                <TextArea label="Descripción" {...field(model.descripcion)} />
                 <DateTimePicker label="Desde" {...field(model.desde)} />
-                <DateTimePicker label="Desde" {...field(model.hasta)} />
-                
-
-            </div>
-
-            <div className="flex gap-m"  >
-                <Button onClick={submit} theme="primary small"> <Icon icon="vaadin:arrow-circle-down" />
+                <DateTimePicker label="Hasta" {...field(model.hasta)} />           
+            </FormLayout>    
+            
+<Divider/>
+            <div className="flex gap-m"  >                
+                <Button onClick={submit} theme="secondary small"> 
+                    
                     Guardar</Button>
 
-            </div>
-
+            </div>  
+ 
         </>
     );
 

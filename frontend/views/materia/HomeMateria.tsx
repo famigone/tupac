@@ -4,17 +4,17 @@ import { TextField } from '@hilla/react-components/TextField.js';
 import { useEffect, useState } from 'react';
 import { Grid } from "@hilla/react-components/Grid";
 import { GridColumn } from "@hilla/react-components/GridColumn";
-
+import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import MateriaRecord from 'Frontend/generated/com/example/application/services/MateriaService/MateriaRecord';
 import { MateriaService } from 'Frontend/generated/endpoints';
-
+import { Divider } from '@chakra-ui/react'
 import { ConfirmDialog } from '@hilla/react-components/ConfirmDialog.js';
 import { HorizontalLayout } from '@hilla/react-components/HorizontalLayout.js';
 import { Icon } from '@hilla/react-components/Icon.js';
 import { GridSortColumn } from '@hilla/react-components/GridSortColumn.js';
 import { GridFilterColumn } from '@hilla/react-components/GridFilterColumn.js';
 import MateriaForm from './MateriaForm';
-
+import { Heading, Text } from '@chakra-ui/react'
 export default function HomeMateria() {
   const [Materias, setMaterias] = useState<MateriaRecord[]>([]);
   const [selected, setSelected] = useState<MateriaRecord | null>();
@@ -40,17 +40,17 @@ export default function HomeMateria() {
     }
   };
 
-  async function onMateriaSaved(Materia: MateriaRecord) {        
+  async function onMateriaSaved(Materia: MateriaRecord) {
     //if (!selected) return;
     console.log("entreo en submiiiiiiiiit ")
-    console.log("Materia.id "+Materia.id)
+    console.log("Materia.id " + Materia.id)
     console.log("y ahoraaaaaaa ")
     //console.log("Selected.id "+selected.id)
 
-    const saved = await MateriaService.save(Materia)        
-    if (Materia.id) {      
+    const saved = await MateriaService.save(Materia)
+    if (Materia.id) {
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
-    } else {      
+    } else {
       setMaterias(Materias => [...Materias, saved]);
     }
     setSelected(saved);
@@ -59,37 +59,59 @@ export default function HomeMateria() {
   return (
     <>
       <div className="p-m  gap-m border: 2px">
+
+        <Card>
+          <CardBody>
+            <Heading mb={2} size='sm'>NUEVA MATERIA</Heading>
+            <Divider />
             <MateriaForm
-                Materia={selected}
-                onSubmit={onMateriaSaved}
+              Materia={selected}
+              onSubmit={onMateriaSaved}
             />
+          </CardBody>
+        </Card>
       </div>
       <div className="p-m  gap-m">
-        <Grid
-          theme="row-stripes"
-          allRowsVisible
-          items={Materias}
-          onActiveItemChanged={e => setSelected(e.detail.value)}
-          selectedItems={[selected]}>          
-          <GridFilterColumn path="nombre" header="NOMBRE" />         
-          <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />         
-          <GridFilterColumn path="desde" header="DESDE" />         
-          <GridFilterColumn path="hasta" header="HASTA" />         
-        </Grid>
-
-        <div style={{ margin: '3px' }} className="flex gap-m gap-s">
-
-          <Button disabled={selected == null} theme="primary error small" onClick={() => setDialogOpened(true)} ><Icon icon="vaadin:close" /> Eliminar</Button>
-          <Button onClick={() => setSelected(null)} theme="primary small" ><Icon icon="vaadin:refresh" />
-            Nuevo</Button>
-          
-        </div>
-        <ConfirmDialog          
-          header="Desea eliminar la Materia?"     
+        <Card>
+          <CardBody>
+            <Heading mb={2} size='sm'>MATERIAS</Heading>
+            <Divider />
+            <Grid
+              theme="row-stripes"
+              allRowsVisible
+              items={Materias}
+              onActiveItemChanged={e => setSelected(e.detail.value)}
+              selectedItems={[selected]}>
+              <GridFilterColumn path="nombre" header="NOMBRE" />
+              <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />
+              <GridFilterColumn path="desde" header="DESDE" />
+              <GridFilterColumn path="hasta" header="HASTA" />
+            </Grid>
+            <Divider />
+            <div style={{ margin: '3px' }} className="flex gap-m gap-s">
+            <Button 
+                onClick={() => setSelected(null)} theme="secondary small" >                 
+                 Nuevo
+              </Button>
+              <Button disabled={selected == null} theme="secondary  error small" onClick={() => setDialogOpened(true)} >
+                Eliminar
+              </Button>
+              
+              <Button 
+                disabled={selected == null}
+                onClick={() => setSelected(null)} theme="primary small" > 
+               
+                Trabajos Prácticos
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
+        <ConfirmDialog
+          header="Desea eliminar la Materia?"
           cancelButtonVisible
           confirmText="Eliminar"
           cancelText="Cancelar"
-          opened={dialogOpened}          
+          opened={dialogOpened}
           onConfirm={() => {
             onMateriaDeleted()
             setDialogOpened(false)

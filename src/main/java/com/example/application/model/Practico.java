@@ -16,8 +16,6 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -26,13 +24,13 @@ import java.util.UUID;
 //@Builder
 @Table
 
-public class Materia implements Serializable {
+public class Practico implements Serializable {
 
     @PrimaryKey
     private Long id;
 
-    @Column("nombre")
-    private String nombre;
+    @Column("tema")
+    private String tema;
 
     @Column("descripcion")
     private String descripcion;
@@ -42,7 +40,5 @@ public class Materia implements Serializable {
 
     @Column("hasta")
     private LocalDateTime hasta;
-
-    
 
 }
