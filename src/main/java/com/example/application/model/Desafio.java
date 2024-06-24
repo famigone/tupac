@@ -2,7 +2,6 @@ package com.example.application.model;
 
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -18,25 +17,18 @@ import lombok.NoArgsConstructor;
 //@Builder
 @Table
 
-public class Practico implements Serializable {
+public class Desafio implements Serializable {
 
-    
     @PrimaryKeyColumn(name = "id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private Long id;
 
-    @PrimaryKeyColumn(name = "materia_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
-    private Long materia_id;
+    @PrimaryKeyColumn(name = "practico_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Long practico_id;
 
-    @Column("tema")
-    private String tema;
+    @Column("desafio")
+    private String desafio;
 
-    @Column("descripcion")
-    private String descripcion;
-
-    @Column("desde")
-    private LocalDateTime desde;
-
-    @Column("hasta")
-    private LocalDateTime hasta;
+    @Column("orden")
+    private Integer orden;         
 
 }
