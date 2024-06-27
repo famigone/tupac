@@ -22,6 +22,9 @@ public class Desafio implements Serializable {
     @PrimaryKeyColumn(name = "id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private Long id;
 
+    @PrimaryKeyColumn(name = "materia_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Long materia_id;
+
     @PrimaryKeyColumn(name = "practico_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
     private Long practico_id;
 

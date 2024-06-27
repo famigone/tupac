@@ -22,6 +22,10 @@
     {
       "name" : "MateriaService",
       "x-class-name" : "com.example.application.services.MateriaService"
+    },
+    {
+      "name" : "PracticoService",
+      "x-class-name" : "com.example.application.services.PracticoService"
     }
   ],
   "paths" : {
@@ -268,6 +272,147 @@
           }
         }
       }
+    },
+    "/PracticoService/delete" : {
+      "post" : {
+        "tags" : [
+          "PracticoService"
+        ],
+        "operationId" : "PracticoService_delete_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer",
+                    "format" : "int64",
+                    "x-java-type" : "java.lang.Long"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/PracticoService/findAllPracticos" : {
+      "post" : {
+        "tags" : [
+          "PracticoService"
+        ],
+        "operationId" : "PracticoService_findAllPracticos_POST",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                      }
+                    ]
+                  },
+                  "x-java-type" : "java.util.List"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PracticoService/save" : {
+      "post" : {
+        "tags" : [
+          "PracticoService"
+        ],
+        "operationId" : "PracticoService_save_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "laPractico" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PracticoService/savePractico" : {
+      "post" : {
+        "tags" : [
+          "PracticoService"
+        ],
+        "operationId" : "PracticoService_savePractico_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "nuevaPractico" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -329,6 +474,53 @@
                 "simpleName" : "NotNull"
               }
             ],
+            "x-java-type" : "java.lang.String"
+          },
+          "desde" : {
+            "type" : "string",
+            "format" : "date-time",
+            "x-java-type" : "java.time.LocalDateTime"
+          },
+          "hasta" : {
+            "type" : "string",
+            "format" : "date-time",
+            "x-java-type" : "java.time.LocalDateTime"
+          }
+        }
+      },
+      "com.example.application.services.PracticoService$PracticoRecord" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "x-java-type" : "java.lang.Long"
+          },
+          "materia_id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "x-java-type" : "java.lang.Long"
+          },
+          "nombre" : {
+            "type" : "string",
+            "x-validation-constraints" : [
+              {
+                "simpleName" : "NotNull"
+              }
+            ],
+            "x-java-type" : "java.lang.String"
+          },
+          "descripcion" : {
+            "type" : "string",
+            "x-validation-constraints" : [
+              {
+                "simpleName" : "NotNull"
+              }
+            ],
+            "x-java-type" : "java.lang.String"
+          },
+          "tema" : {
+            "type" : "string",
             "x-java-type" : "java.lang.String"
           },
           "desde" : {

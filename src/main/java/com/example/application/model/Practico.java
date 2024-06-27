@@ -30,6 +30,9 @@ public class Practico implements Serializable {
     @Column("tema")
     private String tema;
 
+    @Column("nombre")    
+    private String nombre;
+
     @Column("descripcion")
     private String descripcion;
 
