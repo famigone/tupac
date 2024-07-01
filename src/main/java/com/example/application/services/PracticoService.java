@@ -7,8 +7,10 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
+import com.example.application.model.Materia;
 import com.example.application.model.Practico;
 import com.example.application.repository.PracticoRepository;
+import com.example.application.services.MateriaService.MateriaRecord;
 import com.example.application.services.PracticoService.PracticoRecord;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
@@ -44,7 +46,7 @@ public class PracticoService {
 
     public record PracticoRecord(
             Long id,
-            Long materia_id,
+            Long materiaId,
             @NotNull             
             String nombre,                        
             @NotNull             
@@ -62,7 +64,7 @@ public class PracticoService {
     private PracticoRecord toPracticoRecord(Practico laPractico) {
         return new PracticoRecord(
                 laPractico.getId(),
-                laPractico.getMateria_id(),
+                laPractico.getMateriaId(),
                 laPractico.getNombre(),                                
                 laPractico.getDescripcion(),
                 laPractico.getTema(),
@@ -88,7 +90,7 @@ public class PracticoService {
         dbPractico.setId(generateRandomLong());      
         dbPractico.setTema(nuevaPractico.tema);        
         dbPractico.setNombre(nuevaPractico.nombre);        
-        dbPractico.setMateria_id(nuevaPractico.materia_id);        
+        dbPractico.setMateriaId(nuevaPractico.materiaId);        
         dbPractico.setDescripcion(nuevaPractico.descripcion);                
         dbPractico.setDesde(nuevaPractico.desde);        
         dbPractico.setHasta(nuevaPractico.hasta);
@@ -103,7 +105,7 @@ public class PracticoService {
         var dbPractico = repository.findById(laPractico.id).orElseThrow();        
         dbPractico.setNombre(laPractico.nombre);        
         dbPractico.setTema(laPractico.tema);        
-        dbPractico.setMateria_id(laPractico.materia_id);
+        dbPractico.setMateriaId(laPractico.materiaId);
         dbPractico.setDesde(laPractico.desde);        
         dbPractico.setHasta(laPractico.hasta);        
         dbPractico.setDescripcion(laPractico.descripcion);                
@@ -136,5 +138,10 @@ public class PracticoService {
         return rta;
     }
 
+  public List<PracticoRecord> findPracticoByMateriaId(Long materiaId) {
+        Stream<Practico> listaResul = repository.findByMateriaId(materiaId).stream();
+        
+        return listaResul.map(this::toPracticoRecord).toList();
+    }
 
 }

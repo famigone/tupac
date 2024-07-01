@@ -15,12 +15,13 @@ import { GridSortColumn } from '@hilla/react-components/GridSortColumn.js';
 import { GridFilterColumn } from '@hilla/react-components/GridFilterColumn.js';
 import MateriaForm from './MateriaForm';
 import { Heading, Text } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 export default function HomeMateria() {
   const [Materias, setMaterias] = useState<MateriaRecord[]>([]);
   const [selected, setSelected] = useState<MateriaRecord | null>();
   const [dialogOpened, setDialogOpened] = useState(false);
   const [deleteHabilitado, setDeleteHabilitado] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     MateriaService.findAllMaterias().then(setMaterias)
     console.log(setMaterias)
@@ -41,12 +42,7 @@ export default function HomeMateria() {
   };
 
   async function onMateriaSaved(Materia: MateriaRecord) {
-    //if (!selected) return;
-    console.log("entreo en submiiiiiiiiit ")
-    console.log("Materia.id " + Materia.id)
-    console.log("y ahoraaaaaaa ")
-    //console.log("Selected.id "+selected.id)
-
+    
     const saved = await MateriaService.save(Materia)
     if (Materia.id) {
       setMaterias(Materias => Materias.map(current => current.id === saved.id ? saved : current));
@@ -99,8 +95,11 @@ export default function HomeMateria() {
               
               <Button 
                 disabled={selected == null}
-                onClick={() => setSelected(null)} theme="primary small" > 
-               
+                onClick={() => {
+                  if (selected) {
+                    navigate(`/practico/${selected.id}`); // Navega a la URL con el id de la materia
+                  }
+                }} theme="primary small">
                 Trabajos Prácticos
               </Button>
             </div>

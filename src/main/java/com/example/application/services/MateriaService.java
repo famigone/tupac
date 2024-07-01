@@ -121,6 +121,11 @@ public class MateriaService {
         return listaResul.map(this::toMateriaRecord).toList();
     }
 
+    public Optional<Materia> findMateriaById(Long id) {
+        Optional<Materia> resul = repository.findById(id);        
+        return resul;
+    }
+
     public MateriaRecord save(MateriaRecord laMateria) {
        
         MateriaRecord rta;

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import HomeMateria from './views/materia/HomeMateria';
 import LoginView from './views/login/LoginView';
 import RegisterForm from './views/login/RegisterForm';
+import HomePractico from './views/practico/HomePractico';
 
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
@@ -16,6 +17,7 @@ const routing = [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
       { path: '/materia', element: <HomeMateria />, handle: { title: 'Materias' } },
+      { path: '/practico/:materiaId', element: <HomePractico />, handle: { title: 'Practico' } },
       
       
     ],

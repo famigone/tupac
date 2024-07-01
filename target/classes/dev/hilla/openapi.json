@@ -189,6 +189,47 @@
         }
       }
     },
+    "/MateriaService/findMateriaById" : {
+      "post" : {
+        "tags" : [
+          "MateriaService"
+        ],
+        "operationId" : "MateriaService_findMateriaById_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer",
+                    "format" : "int64",
+                    "x-java-type" : "java.lang.Long"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "nullable" : true,
+                  "anyOf" : [
+                    {
+                      "$ref" : "#/components/schemas/com.example.application.model.Materia"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/MateriaService/save" : {
       "post" : {
         "tags" : [
@@ -308,6 +349,50 @@
           "PracticoService"
         ],
         "operationId" : "PracticoService_findAllPracticos_POST",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/com.example.application.services.PracticoService$PracticoRecord"
+                      }
+                    ]
+                  },
+                  "x-java-type" : "java.util.List"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PracticoService/findPracticoByMateriaId" : {
+      "post" : {
+        "tags" : [
+          "PracticoService"
+        ],
+        "operationId" : "PracticoService_findPracticoByMateriaId_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "materiaId" : {
+                    "type" : "integer",
+                    "format" : "int64",
+                    "x-java-type" : "java.lang.Long"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses" : {
           "200" : {
             "description" : "",
@@ -488,6 +573,39 @@
           }
         }
       },
+      "com.example.application.model.Materia" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "nullable" : true,
+            "x-java-type" : "java.lang.Long"
+          },
+          "nombre" : {
+            "type" : "string",
+            "nullable" : true,
+            "x-java-type" : "java.lang.String"
+          },
+          "descripcion" : {
+            "type" : "string",
+            "nullable" : true,
+            "x-java-type" : "java.lang.String"
+          },
+          "desde" : {
+            "type" : "string",
+            "format" : "date-time",
+            "nullable" : true,
+            "x-java-type" : "java.time.LocalDateTime"
+          },
+          "hasta" : {
+            "type" : "string",
+            "format" : "date-time",
+            "nullable" : true,
+            "x-java-type" : "java.time.LocalDateTime"
+          }
+        }
+      },
       "com.example.application.services.PracticoService$PracticoRecord" : {
         "type" : "object",
         "properties" : {
@@ -496,7 +614,7 @@
             "format" : "int64",
             "x-java-type" : "java.lang.Long"
           },
-          "materia_id" : {
+          "materiaId" : {
             "type" : "integer",
             "format" : "int64",
             "x-java-type" : "java.lang.Long"

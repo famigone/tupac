@@ -6,7 +6,7 @@ import { Grid } from "@hilla/react-components/Grid";
 import { GridColumn } from "@hilla/react-components/GridColumn";
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import PracticoRecord from 'Frontend/generated/com/example/application/services/PracticoService/PracticoRecord';
-import { PracticoService } from 'Frontend/generated/endpoints';
+import { MateriaService, PracticoService } from 'Frontend/generated/endpoints';
 import { Divider } from '@chakra-ui/react'
 import { ConfirmDialog } from '@hilla/react-components/ConfirmDialog.js';
 import { HorizontalLayout } from '@hilla/react-components/HorizontalLayout.js';
@@ -15,18 +15,46 @@ import { GridSortColumn } from '@hilla/react-components/GridSortColumn.js';
 import { GridFilterColumn } from '@hilla/react-components/GridFilterColumn.js';
 import PracticoForm from './PracticoForm';
 import { Heading, Text } from '@chakra-ui/react'
+import { useParams } from 'react-router-dom';
+import Materia from 'Frontend/generated/com/example/application/model/Materia';
+
+
 export default function HomePractico() {
   const [Practicos, setPracticos] = useState<PracticoRecord[]>([]);
   const [selected, setSelected] = useState<PracticoRecord | null>();
   const [dialogOpened, setDialogOpened] = useState(false);
   const [deleteHabilitado, setDeleteHabilitado] = useState(true);
+  const [materia, setMateria] = useState<Materia | undefined>(undefined);
+  
 
-  useEffect(() => {
-    PracticoService.findAllPracticos().then(setPracticos)
-    console.log(setPracticos)
-  }, []);
+  //const { materiaId } = useParams();
+  const { materiaId } = useParams<{ materiaId: string }>();
 
 
+  useEffect(() => {    
+    if (materiaId) {      
+      var materiaIdNumber = parseInt(materiaId, 10);
+      if (!isNaN(materiaIdNumber)) {
+        PracticoService.findPracticoByMateriaId(materiaIdNumber).then(setPracticos);
+      } else {
+        console.error("El ID de la materia no es un número válido");
+      }
+    }
+  }, [materiaId]);
+
+
+  useEffect(() => {    
+    if (materiaId) {      
+      var materiaIdNumber = parseInt(materiaId, 10);      
+      if (!isNaN(materiaIdNumber)) {        
+        MateriaService.findMateriaById(materiaIdNumber).then(setMateria)
+      } else {
+        console.error("El ID de la materia no es un número válido");
+      }
+    }
+  }, [materiaId]);
+  
+  
   const onPracticoDeleted = async () => {
     if (selected && selected.id) {
       try {
@@ -41,12 +69,12 @@ export default function HomePractico() {
   };
 
   async function onPracticoSaved(Practico: PracticoRecord) {
-    //if (!selected) return;
-    console.log("entreo en submiiiiiiiiit ")
-    console.log("Practico.id " + Practico.id)
-    console.log("y ahoraaaaaaa ")
-    //console.log("Selected.id "+selected.id)
-
+    
+    if (materiaId) {      
+      
+      Practico.materiaId = parseInt(materiaId, 10);
+      console.log("id materia en práctico: "+Practico.materiaId)
+    }  
     const saved = await PracticoService.save(Practico)
     if (Practico.id) {
       setPracticos(Practicos => Practicos.map(current => current.id === saved.id ? saved : current));
@@ -62,7 +90,7 @@ export default function HomePractico() {
 
         <Card>
           <CardBody>
-            <Heading mb={2} size='sm'>NUEVA Practico</Heading>
+            <Heading mb={2} size='sm'>Nuevo Practico</Heading>
             <Divider />
             <PracticoForm
               Practico={selected}
@@ -74,7 +102,7 @@ export default function HomePractico() {
       <div className="p-m  gap-m">
         <Card>
           <CardBody>
-            <Heading mb={2} size='sm'>PracticoS</Heading>
+            <Heading mb={2} size='sm'>PRÁCTICOS</Heading>
             <Divider />
             <Grid
               theme="row-stripes"
