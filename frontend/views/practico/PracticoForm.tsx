@@ -74,6 +74,7 @@ export default function PracticoForm({ Practico, onSubmit }: PracticoFormProps) 
             
             <FormLayout responsiveSteps={responsiveSteps}>
                 <TextField label="Nombre" {...field(model.nombre)} />
+                <TextField label="Tema" {...field(model.tema)} />
                 <TextArea label="Descripción" {...field(model.descripcion)} />
                 <DateTimePicker label="Desde" {...field(model.desde)} />
                 <DateTimePicker label="Hasta" {...field(model.hasta)} />           

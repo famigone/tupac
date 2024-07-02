@@ -24,8 +24,8 @@ public class Practico implements Serializable {
     @PrimaryKeyColumn(name = "id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private Long id;
 
-    @PrimaryKeyColumn(name = "materiaId", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
-    private Long materiaId;
+    @PrimaryKeyColumn(name = "materiaid", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Long materiaid;
 
     @Column("tema")
     private String tema;

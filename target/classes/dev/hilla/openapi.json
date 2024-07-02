@@ -371,19 +371,19 @@
         }
       }
     },
-    "/PracticoService/findPracticoByMateriaId" : {
+    "/PracticoService/findPracticoByMateriaid" : {
       "post" : {
         "tags" : [
           "PracticoService"
         ],
-        "operationId" : "PracticoService_findPracticoByMateriaId_POST",
+        "operationId" : "PracticoService_findPracticoByMateriaid_POST",
         "requestBody" : {
           "content" : {
             "application/json" : {
               "schema" : {
                 "type" : "object",
                 "properties" : {
-                  "materiaId" : {
+                  "materiaid" : {
                     "type" : "integer",
                     "format" : "int64",
                     "x-java-type" : "java.lang.Long"
@@ -614,7 +614,7 @@
             "format" : "int64",
             "x-java-type" : "java.lang.Long"
           },
-          "materiaId" : {
+          "materiaid" : {
             "type" : "integer",
             "format" : "int64",
             "x-java-type" : "java.lang.Long"

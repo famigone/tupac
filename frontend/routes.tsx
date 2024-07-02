@@ -17,7 +17,7 @@ const routing = [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
       { path: '/materia', element: <HomeMateria />, handle: { title: 'Materias' } },
-      { path: '/practico/:materiaId', element: <HomePractico />, handle: { title: 'Practico' } },
+      { path: '/practico/:materiaid', element: <HomePractico />, handle: { title: 'Practico' } },
       
       
     ],

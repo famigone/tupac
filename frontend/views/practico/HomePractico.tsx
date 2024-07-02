@@ -27,32 +27,23 @@ export default function HomePractico() {
   const [materia, setMateria] = useState<Materia | undefined>(undefined);
   
 
-  //const { materiaId } = useParams();
-  const { materiaId } = useParams<{ materiaId: string }>();
+  //const { materiaid } = useParams();
+  const { materiaid } = useParams<{ materiaid: string }>();
 
 
   useEffect(() => {    
-    if (materiaId) {      
-      var materiaIdNumber = parseInt(materiaId, 10);
-      if (!isNaN(materiaIdNumber)) {
-        PracticoService.findPracticoByMateriaId(materiaIdNumber).then(setPracticos);
+    if (materiaid) {      
+      var materiaidNumber = parseInt(materiaid, 10);
+      if (!isNaN(materiaidNumber)) {        
+        PracticoService.findPracticoByMateriaid(materiaidNumber).then(setPracticos);
       } else {
         console.error("El ID de la materia no es un número válido");
       }
     }
-  }, [materiaId]);
+  }, [materiaid]);
 
 
-  useEffect(() => {    
-    if (materiaId) {      
-      var materiaIdNumber = parseInt(materiaId, 10);      
-      if (!isNaN(materiaIdNumber)) {        
-        MateriaService.findMateriaById(materiaIdNumber).then(setMateria)
-      } else {
-        console.error("El ID de la materia no es un número válido");
-      }
-    }
-  }, [materiaId]);
+
   
   
   const onPracticoDeleted = async () => {
@@ -69,11 +60,11 @@ export default function HomePractico() {
   };
 
   async function onPracticoSaved(Practico: PracticoRecord) {
-    
-    if (materiaId) {      
-      
-      Practico.materiaId = parseInt(materiaId, 10);
-      console.log("id materia en práctico: "+Practico.materiaId)
+    console.log("materiaid esssss "+materiaid)  
+    if (materiaid) {      
+      console.log("materiaid esssss "+materiaid)  
+      Practico.materiaid = parseInt(materiaid, 10);
+      console.log("id materia en práctico: "+Practico.materiaid)
     }  
     const saved = await PracticoService.save(Practico)
     if (Practico.id) {
