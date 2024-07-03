@@ -22,11 +22,11 @@ public class Desafio implements Serializable {
     @PrimaryKeyColumn(name = "id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private Long id;
 
-    @PrimaryKeyColumn(name = "materia_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
-    private Long materia_id;
+    @PrimaryKeyColumn(name = "materiaid", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Long materiaid;
 
-    @PrimaryKeyColumn(name = "practico_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
-    private Long practico_id;
+    @PrimaryKeyColumn(name = "practicoid", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Long practicoid;
 
     @Column("desafio")
     private String desafio;

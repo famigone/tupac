@@ -5,73 +5,72 @@ import { useEffect, useState } from 'react';
 import { Grid } from "@hilla/react-components/Grid";
 import { GridColumn } from "@hilla/react-components/GridColumn";
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
-import PracticoRecord from 'Frontend/generated/com/example/application/services/PracticoService/PracticoRecord';
-import { MateriaService, PracticoService } from 'Frontend/generated/endpoints';
+import DesafioRecord from 'Frontend/generated/com/example/application/services/DesafioService/DesafioRecord';
+import { MateriaService, DesafioService } from 'Frontend/generated/endpoints';
 import { Divider } from '@chakra-ui/react'
 import { ConfirmDialog } from '@hilla/react-components/ConfirmDialog.js';
 import { HorizontalLayout } from '@hilla/react-components/HorizontalLayout.js';
 import { Icon } from '@hilla/react-components/Icon.js';
 import { GridSortColumn } from '@hilla/react-components/GridSortColumn.js';
 import { GridFilterColumn } from '@hilla/react-components/GridFilterColumn.js';
-import PracticoForm from './PracticoForm';
+import DesafioForm from './DesafioForm';
 import { Heading, Text } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom';
 import Materia from 'Frontend/generated/com/example/application/model/Materia';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
-  
 
-export default function HomePractico() {
-  const [Practicos, setPracticos] = useState<PracticoRecord[]>([]);
-  const [selected, setSelected] = useState<PracticoRecord | null>();
+
+export default function HomeDesafio() {
+  const [Desafios, setDesafios] = useState<DesafioRecord[]>([]);
+  const [selected, setSelected] = useState<DesafioRecord | null>();
   const [dialogOpened, setDialogOpened] = useState(false);
   const [deleteHabilitado, setDeleteHabilitado] = useState(true);
   const [materia, setMateria] = useState<Materia | undefined>(undefined);
-  const navigate = useNavigate();
+  
 
   //const { materiaid } = useParams();
-  const { materiaid } = useParams<{ materiaid: string }>();
+  const { practicoid } = useParams<{ practicoid: string }>();
 
 
   useEffect(() => {    
-    if (materiaid) {      
-      var materiaidNumber = parseInt(materiaid, 10);
-      if (!isNaN(materiaidNumber)) {        
-        PracticoService.findPracticoByMateriaid(materiaidNumber).then(setPracticos);
+    if (practicoid) {      
+      var practicoidNumber = parseInt(practicoid, 10);
+      if (!isNaN(practicoidNumber)) {        
+        DesafioService.findDesafioByPracticoid(practicoidNumber).then(setDesafios);
       } else {
         console.error("El ID de la materia no es un número válido");
       }
     }
-  }, [materiaid]);
+  }, [practicoid]);
 
 
 
   
   
-  const onPracticoDeleted = async () => {
+  const onDesafioDeleted = async () => {
     if (selected && selected.id) {
       try {
         // Llamar al servicio para eliminar el registro
-        await PracticoService.delete(selected.id);
+        await DesafioService.delete(selected.id);
         //actualizamos el estado          
-        setPracticos(Practicos.filter(Practico => Practico.id != selected.id))
+        setDesafios(Desafios.filter(Desafio => Desafio.id != selected.id))
       } catch (error) {
-        console.error("Error al eliminar el Practico:", error);
+        console.error("Error al eliminar el Desafio:", error);
       }
     }
   };
 
-  async function onPracticoSaved(Practico: PracticoRecord) {
+  async function onDesafioSaved(Desafio: DesafioRecord) {
     
-    if (materiaid) {      
-    
-      Practico.materiaid = parseInt(materiaid, 10);
-    
+    if (practicoid) {      
+      
+      Desafio.practicoid = parseInt(practicoid, 10);
+      
     }  
-    const saved = await PracticoService.save(Practico)
-    if (Practico.id) {
-      setPracticos(Practicos => Practicos.map(current => current.id === saved.id ? saved : current));
+    const saved = await DesafioService.save(Desafio)
+    if (Desafio.id) {
+      setDesafios(Desafios => Desafios.map(current => current.id === saved.id ? saved : current));
     } else {
-      setPracticos(Practicos => [...Practicos, saved]);
+      setDesafios(Desafios => [...Desafios, saved]);
     }
     setSelected(saved);
   }
@@ -82,11 +81,11 @@ export default function HomePractico() {
 
         <Card>
           <CardBody>
-            <Heading mb={2} size='sm'>Nuevo Practico</Heading>
+            <Heading mb={2} size='sm'>Nuevo Desafio</Heading>
             <Divider />
-            <PracticoForm
-              Practico={selected}
-              onSubmit={onPracticoSaved}
+            <DesafioForm
+              Desafio={selected}
+              onSubmit={onDesafioSaved}
             />
           </CardBody>
         </Card>
@@ -94,18 +93,17 @@ export default function HomePractico() {
       <div className="p-m  gap-m">
         <Card>
           <CardBody>
-            <Heading mb={2} size='sm'>PRÁCTICOS</Heading>
+            <Heading mb={2} size='sm'>DESAFIOS</Heading>
             <Divider />
             <Grid
               theme="row-stripes"
               allRowsVisible
-              items={Practicos}
+              items={Desafios}
               onActiveItemChanged={e => setSelected(e.detail.value)}
               selectedItems={[selected]}>
-              <GridFilterColumn path="nombre" header="NOMBRE" />
-              <GridFilterColumn path="descripcion" header="DESCRIPCIÓN" />
-              <GridFilterColumn path="desde" header="DESDE" />
-              <GridFilterColumn path="hasta" header="HASTA" />
+              <GridFilterColumn path="desafio" header="DESAFIO" />
+              <GridFilterColumn path="orden" header="ORDEN" />
+              
             </Grid>
             <Divider />
             <div style={{ margin: '3px' }} className="flex gap-m gap-s">
@@ -119,24 +117,21 @@ export default function HomePractico() {
               
               <Button 
                 disabled={selected == null}
-                onClick={() => {
-                  if (selected) {
-                    navigate(`/desafio/${selected.id}`); // Navega a la URL con el id de la materia
-                  }
-                }} theme="primary small">
-                Desafios
+                onClick={() => setSelected(null)} theme="primary small" > 
+               
+                Lote de Pruebas
               </Button>
             </div>
           </CardBody>
         </Card>
         <ConfirmDialog
-          header="Desea eliminar la Practico?"
+          header="Desea eliminar la Desafio?"
           cancelButtonVisible
           confirmText="Eliminar"
           cancelText="Cancelar"
           opened={dialogOpened}
           onConfirm={() => {
-            onPracticoDeleted()
+            onDesafioDeleted()
             setDialogOpened(false)
           }}
           onCancel={() => {
