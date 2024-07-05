@@ -37,8 +37,11 @@ public class UserEndpoint {
     }
 
     
-    public User registerUser(@RequestBody User user) {
-        user.setHashedPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public User registerUser(@RequestBody UserRecord user) {
+        User theUser = new User();
+        theUser.setHashedPassword(passwordEncoder.encode(user.password ));
+        theUser.setName(user.name);
+        theUser.setUsername(user.username);
+        return userRepository.save(theUser);
     }
 }

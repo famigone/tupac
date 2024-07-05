@@ -73,7 +73,7 @@
                   "user" : {
                     "anyOf" : [
                       {
-                        "$ref" : "#/components/schemas/com.example.application.model.User"
+                        "$ref" : "#/components/schemas/com.example.application.services.UserEndpoint$UserRecord"
                       }
                     ]
                   }
@@ -714,6 +714,39 @@
             "nullable" : true,
             "items" : {
               "nullable" : true,
+              "anyOf" : [
+                {
+                  "$ref" : "#/components/schemas/com.example.application.model.Role"
+                }
+              ]
+            },
+            "x-java-type" : "java.util.Set"
+          }
+        }
+      },
+      "com.example.application.services.UserEndpoint$UserRecord" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "x-java-type" : "java.lang.Long"
+          },
+          "username" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "name" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "password" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "roles" : {
+            "type" : "array",
+            "items" : {
               "anyOf" : [
                 {
                   "$ref" : "#/components/schemas/com.example.application.model.Role"
