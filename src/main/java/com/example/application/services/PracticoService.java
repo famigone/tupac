@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.application.model.Materia;
 import com.example.application.model.Practico;
+import com.example.application.model.User;
 import com.example.application.repository.PracticoRepository;
 import com.example.application.services.MateriaService.MateriaRecord;
+import com.example.application.services.PerfilService.PerfilRecord;
 import com.example.application.services.PracticoService.PracticoRecord;
+import com.example.application.services.UserEndpoint.UserRecord;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import dev.hilla.BrowserCallable;
@@ -83,6 +86,8 @@ public class PracticoService {
         */
         return ThreadLocalRandom.current().nextLong((long)666666);  
     }
+
+
 
     public PracticoRecord savePractico(PracticoRecord nuevaPractico) {
         // Crea un nuevo objeto Practico y asigna los valores del objeto recibido
