@@ -536,12 +536,12 @@
         }
       }
     },
-    "/PerfilService/findAllPerfils" : {
+    "/PerfilService/findAllPerfiles" : {
       "post" : {
         "tags" : [
           "PerfilService"
         ],
-        "operationId" : "PerfilService_findAllPerfils_POST",
+        "operationId" : "PerfilService_findAllPerfiles_POST",
         "responses" : {
           "200" : {
             "description" : "",

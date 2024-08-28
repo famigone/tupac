@@ -131,7 +131,7 @@ public class PerfilService {
         repository.deleteById(id);
     }
     
-    public List<PerfilRecord> findAllPerfils() {
+    public List<PerfilRecord> findAllPerfiles() {
         Stream<Perfil> listaResul = repository.findAll().stream();
         
         return listaResul.map(this::toPerfilRecord).toList();

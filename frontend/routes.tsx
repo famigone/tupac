@@ -7,6 +7,7 @@ import LoginView from './views/login/LoginView';
 import RegisterForm from './views/login/RegisterForm';
 import HomePractico from './views/practico/HomePractico';
 import HomeDesafio from './views/desafio/HomeDesafio';
+import HomePerfil from './views/perfil/HomePerfil';
 const AboutView = lazy(async () => import('Frontend/views/about/AboutView.js'));
 
 const routing = [
@@ -17,6 +18,7 @@ const routing = [
       { path: '/', element: <HelloWorldView />, handle: { title: 'Hello World' } },
       { path: '/about', element: <AboutView />, handle: { title: 'About' } },
       { path: '/materia', element: <HomeMateria />, handle: { title: 'Materias' } },
+      { path: '/estudiante', element: <HomePerfil />, handle: { title: 'Estudiantes' } },
       { path: '/practico/:materiaid', element: <HomePractico />, handle: { title: 'Practico' } },
       { path: '/desafio/:practicoid', element: <HomeDesafio />, handle: { title: 'Desafíos' } },
       
